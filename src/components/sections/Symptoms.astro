@@ -1,0 +1,21 @@
+---
+import Icon from "../Icon.astro";
+import { mainPhone, symptoms as items } from "../../data/turbosto";
+---
+<section id="symptoms" class="symptoms" data-rec="SEO-R002" aria-labelledby="symptoms-title">
+  <div class="container symptoms__grid">
+    <div class="symptoms__head">
+      <h2 id="symptoms-title">Коли звертатися</h2>
+      <p>Впізнали свій випадок? Подзвоніть, і ми запишемо на діагностику.</p>
+      <a class="btn" href={mainPhone.href}><Icon name="phone" />Записатися на діагностику</a>
+    </div>
+    <div class="symptoms__list">
+      {items.map((it, i) => (
+        <details class="symptom" name="symptoms" open={i === 0}>
+          <summary><span class="symptom__q">{it.q}</span><Icon name="plus" class="symptom__icon" /></summary>
+          <p class="symptom__a">{it.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

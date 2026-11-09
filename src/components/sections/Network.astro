@@ -1,0 +1,59 @@
+---
+import Icon from "../Icon.astro";
+import { network, comingSoon, mapHref, mainPhone, hours } from "../../data/turbosto";
+const sto = hours.sto;
+const def = "kyiv";
+---
+<section id="network" class="network" aria-labelledby="network-title">
+  <div class="container network__grid">
+    <div class="network__head">
+      <h2 id="network-title" class="fact-head">
+        <span class="fact-mask" data-reveal="fact"><span class="fact-head__num">31</span></span>
+        <span class="fact-head__text">СТО в 27 містах</span>
+      </h2>
+      <p class="network__lead">Оберіть місто, щоб побачити адресу, графік і маршрут.</p>
+    </div>
+
+    <div class="network__index" data-network>
+      <ul class="cities" aria-label="Міста з діючими СТО">
+        {network.map((c) => (
+          <li>
+            <button class="city" type="button" aria-pressed={c.slug === def ? "true" : "false"} aria-controls={`city-${c.slug}`} data-city={c.slug}>
+              {c.city}{c.addresses.length > 1 && <span class="city__count">{c.addresses.length}<span class="visually-hidden"> адреси</span></span>}
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div class="network__cards" aria-live="polite">
+        {network.map((c) => (
+          <div class="city-panel" id={`city-${c.slug}`} data-panel={c.slug} data-active={c.slug === def ? "true" : undefined}>
+            <h3 class="city-panel__title">{c.city}</h3>
+            <ul class="addr-list">
+              {c.addresses.map((a, i) => (
+                <li class="addr" style={`--i:${i}`}>
+                  <p class="addr__street">{a}</p>
+                  <p class="addr__hours">СТО: {sto[0].days} {sto[0].time}, {sto[1].days} {sto[1].time}</p>
+                  <div class="addr__actions">
+                    <a class="btn btn--on-dark btn--sm" href={mainPhone.href}><Icon name="phone" />Подзвонити</a>
+                    <a class="link-arrow link-arrow--on-dark" href={mapHref(c.city, a)} target="_blank" rel="noopener noreferrer">Маршрут<span class="visually-hidden"> (Google Карти, нове вікно)</span><Icon name="route" /></a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="network__aside">
+      <p class="network__post"><strong>Немає СТО поруч?</strong> Надішліть деталь Новою поштою за рахунок компанії, і ремонт буде на 10% дешевшим. <a href={mainPhone.href}>Домовитися про відправку</a></p>
+      <details class="soon">
+        <summary>Незабаром відкриття: ще 21 адреса<Icon name="plus" class="soon__icon" /></summary>
+        <p class="soon__note">Ці СТО ще не працюють.</p>
+        <ul class="soon__list">
+          {comingSoon.map((c) => <li>{c}</li>)}
+        </ul>
+      </details>
+    </div>
+  </div>
+</section>

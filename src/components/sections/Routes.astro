@@ -1,0 +1,32 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { FUTURE } from "../../data/turbosto";
+
+const keys = [
+  { href: "#prices", tab: "turbo", name: "Ремонт турбіни", fact: "від 4200 грн" },
+  { href: "#prices", tab: "pnvt", name: "ПНВТ і форсунки", fact: "від 3000 грн" },
+  { href: "#shop", name: "Купити турбіну", fact: "4012 у каталозі" },
+  { href: "#business", name: "Автопарк", fact: "договір і ПДВ" },
+];
+---
+<section id="routes" class="routes" aria-labelledby="routes-title">
+  <div class="container routes__grid">
+    <h2 id="routes-title" class="routes__title">Що потрібно?</h2>
+    <ul class="routes__keys">
+      {keys.map((k) => (
+        <li>
+          <a class="key" href={k.href} data-tab={k.tab}>
+            <span class="key__name">{k.name}</span>
+            <span class="key__fact">{k.fact}</span>
+            <Icon name="arrow" class="key__arrow" />
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="routes__more">
+      Інші послуги: ремонт форсунок, чистка DPF, кондиціонери, рульові рейки, заміна ГРМ, ГБО, автоелектрика, КПП.
+      <FutureLink class="link-future" note={FUTURE}>Усі послуги</FutureLink>
+    </p>
+  </div>
+</section>

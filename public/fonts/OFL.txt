@@ -1,0 +1,4 @@
+Tektur — Copyright 2023 The Tektur Project Authors (https://github.com/hyvyys/Tektur)
+Golos Text — Copyright 2022 The Golos Text Project Authors (https://github.com/googlefonts/golos-text)
+Both fonts are licensed under the SIL Open Font License, Version 1.1: https://openfontlicense.org
+Files: Google Fonts woff2 subsets (cyrillic, latin), self-hosted.

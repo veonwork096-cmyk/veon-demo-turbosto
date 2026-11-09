@@ -1,0 +1,29 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { mainPhone, shopCategories, FUTURE } from "../../data/turbosto";
+---
+<section id="shop" class="shop" aria-labelledby="shop-title">
+  <div class="container">
+    <div class="shop__panel">
+      <div class="shop__head">
+        <h2 id="shop-title">Магазин турбін</h2>
+        <p class="shop__fact">
+          <span class="fact-mask" data-reveal="fact"><span class="fact-head__num">4012</span></span>
+          <span class="shop__fact-cap">турбін у каталозі, нові оригінальні та відновлені</span>
+        </p>
+      </div>
+      <div class="shop__body">
+        <h3 class="shop__h3">Запчастини до турбін</h3>
+        <ul class="shop__cats">
+          {shopCategories.map((c) => <li><span>{c.name}</span><span class="shop__count">{c.count}</span></li>)}
+        </ul>
+        <p class="shop__brands">Взаємозамінні з Garrett, BorgWarner, IHI, Holset, KKK, Mahle.</p>
+        <div class="shop__actions">
+          <a class="btn" href={mainPhone.href}><Icon name="phone" />Підібрати за номером</a>
+          <FutureLink class="link-future" note={FUTURE}>Перейти в каталог</FutureLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

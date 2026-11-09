@@ -1,0 +1,31 @@
+---
+import Icon from "../Icon.astro";
+import { mainPhone, email } from "../../data/turbosto";
+const subject = encodeURIComponent("Автопарк");
+---
+<section id="business" class="business" aria-labelledby="business-title">
+  <div class="container business__grid">
+    <ul class="business__band" aria-label="Головне для компаній">
+      <li>Договір</li>
+      <li>Безготівка і ПДВ</li>
+      <li>Особистий менеджер</li>
+    </ul>
+    <div class="business__body">
+      <h2 id="business-title">Автопаркам і автосервісам</h2>
+      <p class="business__lead">Для таксі, логістики, агропідприємств, АТП, держорганізацій і компаній з власним автопарком.</p>
+      <ul class="business__list">
+        <li>Першочергове обслуговування</li>
+        <li>Договори, рахунки, акти</li>
+        <li>Готівка, безготівка, ПДВ</li>
+        <li>Розстрочка і відтермінування</li>
+        <li>Знижки постійним клієнтам</li>
+        <li>Безкоштовна стоянка</li>
+      </ul>
+      <p class="business__sto">Власникам автосервісів: турбіни і запчастини з каталогу TurboSTO, підбір за номером по телефону.</p>
+      <div class="business__actions">
+        <a class="btn" href={`mailto:${email}?subject=${subject}`}><Icon name="mail" />Написати</a>
+        <a class="link-arrow" href={mainPhone.href}>Подзвонити {mainPhone.label}<Icon name="arrow" /></a>
+      </div>
+    </div>
+  </div>
+</section>

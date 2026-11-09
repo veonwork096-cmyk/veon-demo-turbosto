@@ -1,0 +1,35 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { mainPhone, FUTURE } from "../../data/turbosto";
+---
+<section id="warranty" class="warranty" data-rec="S-R103" aria-labelledby="warranty-title">
+  <div class="container warranty__grid">
+    <div class="warranty__head">
+      <h2 id="warranty-title" class="fact-head fact-head--warranty">
+        <span class="fact-head__text">Гарантія</span>
+        <span class="fact-mask" data-reveal="fact"><span class="fact-head__num"><span class="fact-head__pre">до </span>3 років</span></span>
+      </h2>
+      <p class="warranty__cond">Строк залежить від виду ремонту.</p>
+    </div>
+    <div class="warranty__body">
+      <h3 class="warranty__h3">Щоб гарантія діяла</h3>
+      <ul class="warranty__list">
+        <li>Міняйте масло і фільтри кожні 8–10 тис. км і зберігайте акти.</li>
+        <li>Тиск масла має бути не менше 1,5 кгс/см².</li>
+      </ul>
+      <details class="warranty__ex">
+        <summary>Коли гарантія не діє<Icon name="plus" class="soon__icon" /></summary>
+        <ul>
+          <li>Є сліди стороннього втручання.</li>
+          <li>Несправний двигун або магістралі.</li>
+          <li>Не дотримано інструкцію монтажу.</li>
+        </ul>
+      </details>
+      <div class="warranty__actions">
+        <a class="btn" href={mainPhone.href}><Icon name="phone" />Уточнити гарантію</a>
+        <FutureLink class="link-future" note={FUTURE}>Умови гарантії</FutureLink>
+      </div>
+    </div>
+  </div>
+</section>

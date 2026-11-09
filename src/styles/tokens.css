@@ -1,0 +1,146 @@
+/* Hallmark · shape: fact ledger, custom · genre: editorial · theme: custom · job: book · idea: "Цифри, на які можна подзвонити: кожен блок відкриває факт мережі, а жовтий TurboSTO стає площиною, на якій стоїть дзвінок" · vibe: "світлий метал, жовта площина дії, інженерна точність"
+ * paper: #E8EAEB · accent: #FFD71D · display: Tektur · body: Golos Text · hero: H1 на всю ширину над жовтим табло «від 4200 грн, від 6 год, 31 СТО» з врізаним фото майстра, дзвінок і номер у площині · nav: світла закріплена смуга, логотип, 6 якорів, номер з графіком, кнопка «Подзвонити»; на телефоні іконка дзвінка, меню і нижня панель · footer: графітове продовження контактів, світлий логотип, майбутні сторінки, оплата частинами, юрособа · imagery: client photos · signature: жовте табло першого екрана і покажчик 27 міст на графіті, де місто вибирається одним дотиком
+ * axes: light/techno-squared/chromatic-yellow · posture: committed · surface: absolute white for panels and fields, from the client concept · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V4 · weakest: E, the hero photo window and the fact board share one row at 1024 to 1280; the window drops under 64rem and the figures scale with the viewport so nothing collides */
+/* Hallmark · waive 7b · --color-panel #FFFFFF on the price board, the shop panel and form fields · white panels and fields are a named colour of the approved client concept (concept.md veon-concept colors) */
+/* Hallmark · answered F4 · .btn--on-dark is the same primary recipe inverted for graphite and yellow-on-dark surfaces, as concept.md «Ключові компоненти» requires; one primary per surface */
+/* Client design tokens: from design/concept.md (veon-concept: colors, fonts). */
+
+@font-face {
+  font-family: "Tektur";
+  src: url("/fonts/tektur-cyrillic.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Tektur";
+  src: url("/fonts/tektur-latin.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Golos Text";
+  src: url("/fonts/golos-text-cyrillic.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Golos Text";
+  src: url("/fonts/golos-text-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Metric-adjusted fallbacks so the swap does not shift the layout much. */
+@font-face {
+  font-family: "Tektur Fallback";
+  src: local("Arial");
+  size-adjust: 104%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Golos Fallback";
+  src: local("Arial");
+  size-adjust: 101%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+:root {
+  /* Colour roles (concept.md §5 «Look») */
+  --color-bg: #E8EAEB;          /* aluminium: page */
+  --color-panel: #FFFFFF;       /* white: price board, shop panel, fields */
+  --color-text: #16181B;        /* graphite: text, primary button, dark blocks */
+  --color-muted: #4B5157;       /* steel: secondary text on light */
+  --color-accent: #FFD71D;      /* TurboSTO yellow: planes and fills only, never text on light */
+  --color-accent-ink: #16181B;  /* text on yellow */
+  --color-field: #FFD71D;       /* committed posture: the yellow planes (hero board, warranty, business band) */
+  --color-control: #6B7177;     /* field and selected-state edges, 3:1 or more */
+  --color-rule: #C9CDD0;        /* decorative hairlines */
+  --color-on-dark: #E8EAEB;     /* text on graphite */
+  --color-on-dark-muted: #A3A9AE; /* secondary text on graphite */
+  --color-dark: #16181B;        /* graphite surfaces */
+  --color-dark-rule: #4B5157;   /* hairlines on graphite */
+  --color-focus: #16181B;       /* focus ring on light and yellow */
+  --color-focus-on-dark: #FFD71D;
+
+  /* Type */
+  --font-display: "Tektur", "Tektur Fallback", system-ui, sans-serif;
+  --font-body: "Golos Text", "Golos Fallback", system-ui, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 600;
+
+  /* Scale 390 → 1440 (concept.md §8): fact 80/168 · H1 36/64 · H2 30/44 · H3 20/24 · text 16/18 · caption 13/14 */
+  --text-fact: clamp(4.5rem, 1.6rem + 7.4vw, 9rem);
+  --text-fact-s: clamp(3.25rem, 1.8rem + 4.2vw, 6rem);
+  --text-h1: clamp(2.125rem, 1.55rem + 2.4vw, 4rem);
+  --text-h2: clamp(1.875rem, 1.45rem + 1.3vw, 2.75rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+  --text-sum: clamp(1.75rem, 1.4rem + 0.9vw, 2.5rem);
+  --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.5rem);
+  --text-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --lh-fact: 0.9;
+  --lh-head: 1.08;
+  --lh-body: 1.55;
+
+  /* Space: 8-based rhythm */
+  --space-1: 0.5rem;   /* 8 */
+  --space-2: 1rem;     /* 16 */
+  --space-3: 1.5rem;   /* 24 */
+  --space-4: 2rem;     /* 32 */
+  --space-5: 3rem;     /* 48 */
+  --space-6: 4rem;     /* 64 */
+  --space-7: 6rem;     /* 96 */
+  --space-8: 8rem;     /* 128 */
+  --space-half: 0.25rem; /* 4 */
+  --section-gap: clamp(4.5rem, 3.2rem + 5vw, 8rem);
+  --gutter: clamp(1.25rem, 0.5rem + 3.2vw, 3.75rem); /* 20 / 32 / 60 */
+  --gap: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);       /* 12 / 16 / 24 */
+  --container: 82.5rem; /* 1320 */
+  --space: var(--gutter);
+
+  /* Shape */
+  --radius: 2px;
+  --border: 1px;
+  --ring: 3px;
+  --tap: 48px;
+  --btn-h: 3.25rem;   /* 52 */
+  --header-h: 4rem;   /* 64; 72 from 64rem */
+
+  /* Motion (concept.md «Рух») */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-micro: 120ms;
+  --dur-fill: 150ms;
+  --dur-arrow: 160ms;
+  --dur-panel: 180ms;
+  --dur-short: 220ms;
+  --dur-tab: 250ms;
+  --dur-fact: 500ms;
+  --dur-plane: 600ms;
+  --dur: 500ms;
+
+  /* Layers */
+  --z-raised: 10;
+  --z-sticky: 200;
+  --z-nav: 300;
+  --z-menu: 400;
+  --z-tooltip: 600;
+}
+
+@media (min-width: 64rem) {
+  :root { --header-h: 4.5rem; }
+}

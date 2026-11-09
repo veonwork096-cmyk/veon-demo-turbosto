@@ -1,0 +1,45 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { mainPhone, rating, FUTURE } from "../../data/turbosto";
+const B = import.meta.env.BASE_URL;
+
+const awards = [
+  { file: "vybir-spozhyvacha-2022", alt: "Відзнака «Вибір споживача 2022»", cap: "Вибір споживача 2022" },
+  { file: "vybir-roku-2023", alt: "Відзнака «№1 Вибір року 2023»", cap: "Вибір року 2023" },
+  { file: "vybir-roku-2024", alt: "Відзнака «№1 Вибір року 2024»", cap: "Вибір року 2024" },
+];
+---
+<section id="proof" class="proof" data-rec="R-006" aria-labelledby="proof-title">
+  <div class="container proof__grid">
+    <div class="proof__rating">
+      <h2 id="proof-title">Чому довіряють</h2>
+      <p class="proof__fact">
+        <span class="fact-mask" data-reveal="fact"><span class="fact-head__num">{rating.value}</span></span>
+        <span class="proof__fact-cap">рейтинг у Google, {rating.reviews} відгуків</span>
+      </p>
+      <p class="proof__src">За даними сайту TurboSTO, листопад 2026 року.</p>
+    </div>
+    <div class="proof__body">
+      <p class="proof__lead">За даними компанії, мережа робить близько 3200 ремонтів на місяць, у ній працюють 350 майстрів.</p>
+      <ul class="awards" aria-label="Відзнаки">
+        {awards.map((a) => (
+          <li>
+            <img src={`${B}images/${a.file}-160.webp`} srcset={`${B}images/${a.file}-160.webp 160w, ${B}images/${a.file}-320.webp 320w`} sizes="112px" width="160" height="160" alt={a.alt} loading="lazy" fetchpriority="low" decoding="async" />
+            <span>{a.cap}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="proof__line">«Топ 100 автосервісів» 2020–2021 за версією AvtoExpert.</p>
+      <dl class="proof__dl">
+        <div><dt>Офіційний дистриб'ютор</dt><dd>IHI Charging Systems International GmbH, POWERTEC</dd></div>
+        <div><dt>Офіційний партнер</dt><dd>Launch, TOPTUL</dd></div>
+        <div><dt>Обладнання</dt><dd>стенди OpenSystem UIS-CAM і CR-IP, балансувальні верстати ДБСТ-10, БВІ-03-10Т і СБР-10, стенд GEOMET-2000, сканери TEXA 712R і Launch X431</dd></div>
+      </dl>
+      <div class="proof__actions">
+        <a class="btn" href={mainPhone.href}><Icon name="phone" />Подзвонити</a>
+        <FutureLink class="link-future" note={FUTURE}>Про компанію</FutureLink>
+      </div>
+    </div>
+  </div>
+</section>

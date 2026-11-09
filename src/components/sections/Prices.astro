@@ -1,0 +1,44 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { priceTabs, mainPhone, FUTURE } from "../../data/turbosto";
+---
+<section id="prices" class="prices" aria-labelledby="prices-title">
+  <div class="container">
+    <div class="prices__panel">
+      <div class="prices__main" data-tabs>
+        <h2 id="prices-title" class="prices__title">Ціни і терміни</h2>
+        <div class="tabs__list" role="tablist" aria-label="Вид ремонту">
+          {priceTabs.map((t, i) => (
+            <button class="tabs__tab" type="button" role="tab" id={`tab-${t.id}`} aria-controls={`panel-${t.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-tab-id={t.id}>{t.tab}</button>
+          ))}
+          <span class="tabs__indicator" aria-hidden="true"></span>
+        </div>
+        {priceTabs.map((t) => (
+          <div class="tabs__panel" role="tabpanel" id={`panel-${t.id}`} aria-labelledby={`tab-${t.id}`} data-panel-id={t.id}>
+            <h3 class="prices__h3">{t.title}</h3>
+            <p class="prices__term">{t.term} Ціни «від»: точну суму назвемо після діагностики.</p>
+            <table class="price-table">
+              <thead>
+                <tr><th scope="col">Послуга</th><th scope="col">Ціна, від</th></tr>
+              </thead>
+              <tbody>
+                {t.rows.map((r) => (
+                  <tr><th scope="row">{r.name}</th><td><span class="price-table__sum">{r.from}</span>&nbsp;грн</td></tr>
+                ))}
+              </tbody>
+            </table>
+            {t.note && <p class="prices__note">{t.note}</p>}
+          </div>
+        ))}
+      </div>
+      <aside class="prices__aside" aria-label="Оплата і діагностика">
+        <p class="prices__fact"><span class="prices__fact-num">24</span> <span class="prices__fact-unit">місяці</span></p>
+        <p>Розстрочка до 24 місяців: monobank і ПриватБанк.</p>
+        <p>Комп'ютерна діагностика безкоштовна за умови ремонту в TurboSTO.</p>
+        <a class="btn" href={mainPhone.href}><Icon name="phone" />Дізнатися точну ціну</a>
+        <FutureLink class="link-future" note={FUTURE}>Усі ціни</FutureLink>
+      </aside>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { mainPhone, email, hours, FUTURE } from "../data/turbosto";
+
+const nav = [
+  { href: "#prices", label: "Ремонт турбін", tab: "turbo" },
+  { href: "#prices", label: "ПНВТ і форсунки", tab: "pnvt" },
+  { href: "#shop", label: "Магазин" },
+  { href: "#network", label: "СТО на карті" },
+  { href: "#business", label: "Бізнесу" },
+  { href: "#warranty", label: "Гарантія" },
+];
+const cc = hours.callCenter;
+---
+<header class="site-header">
+  <div class="container site-header__row">
+    <a class="site-header__logo" href="#top">
+      <img src={import.meta.env.BASE_URL + "images/logo-turbosto-dark.svg"} width="303" height="65" alt="TurboSTO, на початок сторінки" />
+    </a>
+    <nav class="site-header__nav" aria-label="Розділи сторінки">
+      <ul>
+        {nav.map((n) => <li><a href={n.href} data-tab={n.tab}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="site-header__contact">
+      <a class="site-header__phone" href={mainPhone.href}>{mainPhone.label}</a>
+      <span class="site-header__hours">{cc[0].days} {cc[0].time}, {cc[1].days} {cc[1].time}</span>
+    </div>
+    <a class="btn btn--header" href={mainPhone.href}>Подзвонити</a>
+    <div class="site-header__lang" aria-label="Мова сайту">
+      <span class="site-header__lang-current" aria-current="true">UA</span>
+      <FutureLink class="site-header__lang-ru future-link--end" note={FUTURE}>RU</FutureLink>
+    </div>
+    <a class="site-header__icon" href={mainPhone.href} aria-label={`Подзвонити ${mainPhone.label}`}><Icon name="phone" /></a>
+    <button class="site-header__icon site-header__burger" type="button" popovertarget="menu" aria-controls="menu" aria-label="Меню"><Icon name="menu" /></button>
+  </div>
+  <div id="menu" class="menu" popover aria-label="Меню">
+    <div class="menu__top">
+      <img src={import.meta.env.BASE_URL + "images/logo-turbosto-light.svg"} width="303" height="65" alt="TurboSTO" />
+      <button class="site-header__icon menu__close" type="button" popovertarget="menu" popovertargetaction="hide" aria-label="Закрити меню"><Icon name="close" /></button>
+    </div>
+    <nav aria-label="Розділи сторінки, меню">
+      <ul class="menu__list">
+        {nav.map((n) => <li><a href={n.href} data-tab={n.tab}>{n.label}</a></li>)}
+        <li><a href="#contacts">Контакти</a></li>
+      </ul>
+    </nav>
+    <div class="menu__contact">
+      <a class="btn btn--on-dark btn--block" href={mainPhone.href}><Icon name="phone" />Подзвонити {mainPhone.label}</a>
+      <p>Контакт-центр: {cc[0].days} {cc[0].time}, {cc[1].days} {cc[1].time}</p>
+      <p><a class="menu__mail" href={`mailto:${email}`}>{email}</a></p>
+      <p class="menu__lang"><span aria-current="true">UA</span> <FutureLink note={FUTURE}>RU</FutureLink></p>
+    </div>
+  </div>
+</header>

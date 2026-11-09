@@ -1,0 +1,26 @@
+---
+import FutureLink from "./FutureLink.astro";
+import { FUTURE } from "../data/turbosto";
+const B = import.meta.env.BASE_URL;
+const pages = [
+  "Ремонт турбін", "Ремонт ПНВТ і форсунок", "Інші послуги", "Магазин турбін", "Мережа СТО", "Гарантія",
+  "Акції", "Про компанію", "Блог", "Оплата і доставка", "Оферта", "Політика конфіденційності",
+];
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <a class="site-footer__logo" href="#top">
+      <img src={B + "images/logo-turbosto-light.svg"} width="303" height="65" alt="TurboSTO, на початок сторінки" />
+    </a>
+    <nav class="site-footer__nav" aria-label="Сторінки сайту">
+      <ul>
+        {pages.map((p) => <li><FutureLink note={FUTURE}>{p}</FutureLink></li>)}
+      </ul>
+    </nav>
+    <div class="site-footer__legal">
+      <p>Оплата частинами: monobank, ПриватБанк.</p>
+      <p>ТОВ «Автівна», код ЄДРПОУ 45485191.<br />Київ, вул. Ю. Іллєнка, 48 В, 04119.</p>
+      <p>© 2018–2026 TurboSTO, національна мережа СТО з ремонту турбін.</p>
+    </div>
+  </div>
+</footer>

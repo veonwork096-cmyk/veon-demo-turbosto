@@ -1,0 +1,59 @@
+---
+import Icon from "../Icon.astro";
+import FutureLink from "../FutureLink.astro";
+import { phones, mainPhone, email, hours, network, socials } from "../../data/turbosto";
+const cc = hours.callCenter;
+const sto = hours.sto;
+const topics = ["Турбіна", "ПНВТ", "Форсунки", "Купити турбіну", "Автопарк", "Інше"];
+---
+<section id="contacts" class="contacts" data-rec="S-R101" aria-labelledby="contacts-title">
+  <div class="container contacts__grid">
+    <div class="contacts__info">
+      <h2 id="contacts-title">Контакти</h2>
+      <ul class="contacts__phones">
+        {phones.map((p) => <li><a href={p.href}>{p.label}</a></li>)}
+      </ul>
+      <p class="contacts__mail"><a href={`mailto:${email}`}>{email}</a></p>
+      <dl class="contacts__hours">
+        <div><dt>Контакт-центр</dt><dd>{cc[0].days} {cc[0].time}<br />{cc[1].days} {cc[1].time}</dd></div>
+        <div><dt>СТО</dt><dd>{sto[0].days} {sto[0].time}<br />{sto[1].days} {sto[1].time}</dd></div>
+      </dl>
+      <ul class="contacts__social" aria-label="Соцмережі TurboSTO">
+        {socials.map((s) => <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.name}<span class="visually-hidden"> (нове вікно)</span></a></li>)}
+      </ul>
+    </div>
+
+    <form class="callback" aria-labelledby="callback-title" data-demo-form>
+      <h3 id="callback-title" class="callback__title">Передзвоніть мені</h3>
+      <div class="field">
+        <label for="cb-name">Ім'я</label>
+        <input id="cb-name" name="name" type="text" autocomplete="given-name" />
+      </div>
+      <div class="field">
+        <label for="cb-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input id="cb-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380" required aria-describedby="cb-phone-help" />
+        <p class="field__help" id="cb-phone-help">У форматі +380 XX XXX XX XX</p>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cb-city">Місто</label>
+          <select id="cb-city" name="city">
+            <option value="">Оберіть місто</option>
+            {network.map((c) => <option value={c.slug}>{c.city}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label for="cb-topic">Що ремонтуємо</label>
+          <select id="cb-topic" name="topic">
+            {topics.map((t) => <option>{t}</option>)}
+          </select>
+        </div>
+      </div>
+      <div class="callback__send">
+        <FutureLink class="btn btn--disabled" note="Онлайн-заявка з'явиться в повній версії сайту">Надіслати заявку</FutureLink>
+        <p class="callback__note">Онлайн-заявка з'явиться в повній версії сайту. Зараз швидше подзвонити:</p>
+        <a class="callback__phone" href={mainPhone.href}><Icon name="phone" />{mainPhone.label}</a>
+      </div>
+    </form>
+  </div>
+</section>

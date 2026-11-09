@@ -1,0 +1,66 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MobileBar from "../components/MobileBar.astro";
+import Hero from "../components/sections/Hero.astro";
+import Routes from "../components/sections/Routes.astro";
+import Prices from "../components/sections/Prices.astro";
+import Symptoms from "../components/sections/Symptoms.astro";
+import Network from "../components/sections/Network.astro";
+import Warranty from "../components/sections/Warranty.astro";
+import Proof from "../components/sections/Proof.astro";
+import Shop from "../components/sections/Shop.astro";
+import Business from "../components/sections/Business.astro";
+import Contacts from "../components/sections/Contacts.astro";
+import { network, phones, email, socials, symptoms } from "../data/turbosto";
+
+const title = "Ремонт турбін і ПНВТ від 4200 грн — 31 СТО по Україні | TurboSTO";
+const description = "Ремонт турбін, ПНВТ і форсунок у мережі TurboSTO: ціни від 4200 грн, ремонт від 6 годин, 31 СТО по всій Україні. Гарантія до 3 років — залежно від виду ремонту.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  name: "TurboSTO",
+  legalName: "ТОВ «Автівна»",
+  telephone: phones.map((p) => p.full.replace(/[^+\d]/g, "")),
+  email,
+  priceRange: "від 950 грн",
+  areaServed: "UA",
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "16:00" },
+  ],
+  sameAs: socials.map((s) => s.href),
+  department: network.flatMap((c) => c.addresses.map((a) => ({
+    "@type": "AutoRepair",
+    name: `TurboSTO, ${c.city}`,
+    address: { "@type": "PostalAddress", addressLocality: c.city, streetAddress: a, addressCountry: "UA" },
+  }))),
+};
+// SEO-R002: WebSite and the visible FAQ («Коли звертатися») as FAQPage.
+const websiteLd = { "@context": "https://schema.org", "@type": "WebSite", name: "TurboSTO", inLanguage: "uk" };
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: symptoms.map((it) => ({ "@type": "Question", name: it.q, acceptedAnswer: { "@type": "Answer", text: it.a } })),
+};
+---
+<Base lang="uk" title={title} description={description} mainRec="R-008">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  <Header slot="header" />
+  <Hero />
+  <Routes />
+  <Prices />
+  <Symptoms />
+  <Network />
+  <Warranty />
+  <Proof />
+  <Shop />
+  <Business />
+  <Contacts />
+  <Footer slot="footer" />
+  <MobileBar slot="footer" />
+</Base>

@@ -1,0 +1,49 @@
+---
+import Icon from "../Icon.astro";
+import { mainPhone, hours, rating } from "../../data/turbosto";
+const B = import.meta.env.BASE_URL;
+const cc = hours.callCenter;
+---
+<section id="hero" class="hero" data-rec="R-001,R-006,M-R002,M-R003,S-R104,SEO-R001,SEO-R003" aria-labelledby="hero-title">
+  <div class="container hero__head">
+    <h1 id="hero-title" class="hero__title">Ремонт турбін і паливної апаратури у&nbsp;31&nbsp;СТО по&nbsp;всій Україні</h1>
+  </div>
+  <div class="hero__plane">
+    <div class="container hero__grid">
+      <dl class="board" data-rec="R-001">
+        <div class="board__item">
+          <dt>стандартний ремонт турбіни</dt>
+          <dd><span class="board__pre">від </span><span class="board__num">4200</span><span class="board__unit"> грн</span></dd>
+        </div>
+        <div class="board__item">
+          <dt>терміновий ремонт</dt>
+          <dd><span class="board__pre">від </span><span class="board__num">6</span><span class="board__unit"> год</span></dd>
+        </div>
+        <div class="board__item board__item--net">
+          <dt>у 27 містах України</dt>
+          <dd><span class="board__num">31</span><span class="board__unit"> СТО</span></dd>
+        </div>
+      </dl>
+      <div class="hero__act">
+        <p class="hero__lead">Подзвоніть: назвемо ціну, строк і найближче СТО.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--hero" href={mainPhone.href}><Icon name="phone" />Подзвонити</a>
+          <a class="hero__phone" href={mainPhone.href}>{mainPhone.label}</a>
+          <a class="link-arrow" href="#network">Знайти СТО<Icon name="arrow" /></a>
+        </div>
+        <div class="hero__meta">
+          <p>Контакт-центр: {cc[0].days} {cc[0].time}, {cc[1].days} {cc[1].time}</p>
+          <p data-rec="R-006">Рейтинг <strong>{rating.value}</strong> з 5 у Google, {rating.reviews} відгуків <span class="hero__src">(за даними сайту TurboSTO)</span></p>
+        </div>
+      </div>
+      <figure class="hero__photo">
+        <picture>
+          <source media="(min-width: 64rem)" type="image/avif" srcset={`${B}images/master-turbines-3x4-480.avif 480w, ${B}images/master-turbines-3x4-720.avif 720w, ${B}images/master-turbines-3x4-1080.avif 1080w`} sizes="(min-width: 90rem) 330px, 24vw" />
+          <source media="(min-width: 64rem)" type="image/webp" srcset={`${B}images/master-turbines-3x4-480.webp 480w, ${B}images/master-turbines-3x4-720.webp 720w, ${B}images/master-turbines-3x4-1080.webp 1080w`} sizes="(min-width: 90rem) 330px, 24vw" />
+          <source type="image/avif" srcset={`${B}images/master-turbines-16x9-640.avif 640w, ${B}images/master-turbines-16x9-960.avif 960w, ${B}images/master-turbines-16x9-1280.avif 1280w`} sizes="100vw" />
+          <img src={B + "images/master-turbines-16x9-960.webp"} srcset={`${B}images/master-turbines-16x9-640.webp 640w, ${B}images/master-turbines-16x9-960.webp 960w, ${B}images/master-turbines-16x9-1280.webp 1280w`} sizes="100vw" width="1280" height="720" alt="Майстер TurboSTO у фірмовій формі з двома турбінами в руках" fetchpriority="high" decoding="async" />
+        </picture>
+      </figure>
+    </div>
+  </div>
+</section>
